@@ -30,7 +30,7 @@
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="5" kind="modal" identifier="showAlternate" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="22"/>
+                        <segue destination="5" kind="custom" identifier="showAlternate" customClass="DZBooksFlipSegue" id="22"/>
                     </connections>
                 </viewController>
             </objects>
