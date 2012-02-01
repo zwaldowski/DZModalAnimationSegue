@@ -8,8 +8,6 @@
 
 #import "DZFlipsideViewController.h"
 
-@interface DZMainViewController : UIViewController <DZFlipsideViewControllerDelegate, UIPopoverControllerDelegate>
-
-@property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
+@interface DZMainViewController : UIViewController <DZFlipsideViewControllerDelegate>
 
 @end
