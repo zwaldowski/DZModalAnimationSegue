@@ -123,4 +123,22 @@ static CGImageRef imageForView(UIView *aView) {
 	}];
 }
 
++ (void)dismissByFlippingViewController:(UIViewController *)viewController completion:(void(^)(void))completion {
+	UIViewController *fromViewController = viewController.presentedViewController ?: viewController;
+	UIViewController *toViewController = viewController.presentingViewController ?: viewController;
+	[fromViewController dismissViewControllerAnimated:NO completion:^{
+		[DZBooksFlipSegue flipToViewController:toViewController fromViewController:fromViewController];
+		if (completion)
+			completion();
+	}];
+}
+
+@end
+
+@implementation UIViewController (DZBooksFlipSegue)
+
+- (void)dismissViewControllerByFlippingWithCompletion:(void (^)(void))completion {
+	[DZBooksFlipSegue dismissByFlippingViewController:self completion:completion];
+}
+
 @end

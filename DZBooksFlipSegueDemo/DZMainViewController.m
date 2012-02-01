@@ -7,6 +7,7 @@
 //
 
 #import "DZMainViewController.h"
+#import "DZBooksFlipSegue.h"
 
 @implementation DZMainViewController
 
@@ -65,7 +66,7 @@
 
 - (void)flipsideViewControllerDidFinish:(DZFlipsideViewController *)controller
 {
-    [self dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerByFlippingWithCompletion:NULL];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -10,4 +10,12 @@
 
 @interface DZBooksFlipSegue : UIStoryboardSegue
 
++ (void)dismissByFlippingViewController:(UIViewController *)viewController completion:(void(^)(void))completion;
+
+@end
+
+@interface UIViewController (DZBooksFlipSegue)
+
+- (void)dismissViewControllerByFlippingWithCompletion:(void (^)(void))completion;
+
 @end
