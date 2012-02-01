@@ -13,6 +13,10 @@ typedef enum {
 	DZCustomModalAnimationBooksFlip,
 	DZCustomModalAnimationCurlDown,
 	DZCustomModalAnimationCurlUp,
+	DZCustomModalAnimationFlipLeft,
+	DZCustomModalAnimationFlipTop,
+	DZCustomModalAnimationFlipBottom,
+	DZCustomModalAnimationFlipRight
 } DZCustomModalAnimation;
 
 @interface DZModalAnimationSegue : UIStoryboardSegue

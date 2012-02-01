@@ -73,6 +73,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showAlternate"]) {
         [[segue destinationViewController] setDelegate:self];
+		//[(DZModalAnimationSegue *)segue setAnimation:DZCustomModalAnimationCrossFade];
     }
 }
 

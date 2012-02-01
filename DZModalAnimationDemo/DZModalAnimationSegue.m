@@ -35,36 +35,11 @@ static CGImageRef imageForView(UIView *aView) {
 
 + (void)performAnimation:(DZCustomModalAnimation)animation fromView:(UIView *)from toView:(UIView *)to reverse:(BOOL)reverse completion:(void(^)(void))completion;
 
-+ (void)flipFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion;
-+ (void)fadeFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion;
-
 @end
 
 @implementation DZModalAnimationSegue
 
 @synthesize animation, animationStatusBarStyle;
-
-+ (void)performAnimation:(DZCustomModalAnimation)animation fromView:(UIView *)from toView:(UIView *)to reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	SEL selector;
-	switch (animation) {
-		case DZCustomModalAnimationCrossFade: selector = @selector(fadeFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationBooksFlip: selector = @selector(flipFrom:to:reverse:completion:); break;
-		default:							  selector = NULL; break;
-	}
-	
-	NSMethodSignature *sig = [self methodSignatureForSelector:selector];
-	if (!sig)
-		return;
-	
-	NSInvocation* invo = [NSInvocation invocationWithMethodSignature:sig];
-	[invo setTarget:self];
-	[invo setSelector:selector];
-	[invo setArgument:&from atIndex:2];
-	[invo setArgument:&to atIndex:3];
-	[invo setArgument:&reverse atIndex:4];
-	[invo setArgument:&completion atIndex:5];
-	[invo invoke];
-}
 
 + (void)flipFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
 	CALayer *contentLayer = [CALayer layer];
@@ -148,6 +123,75 @@ static CGImageRef imageForView(UIView *aView) {
 		if (completion)
 			completion();
 	}];
+}
+
++ (void)transitionFrom:(UIView *)fromView to:(UIView *)toView duration:(NSTimeInterval)length openAnimation:(UIViewAnimationOptions)openOptions closeAnimation:(UIViewAnimationOptions)closeOptions reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[toView.superview addSubview:fromView];
+	UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionShowHideTransitionViews;
+	if (reverse)
+		options |= closeOptions;
+	else
+		options |= openOptions;
+	[UIView transitionFromView:fromView toView:toView duration:length options:options completion:^(BOOL finished) {
+		if (completion)
+			completion();
+	}];
+}
+
++ (void)fadeFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[self transitionFrom:fromView to:toView duration:(1./3.) openAnimation:UIViewAnimationOptionTransitionCrossDissolve closeAnimation:UIViewAnimationOptionTransitionCrossDissolve reverse:reverse completion:completion];
+}
+
++ (void)curlDownFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionCurlDown closeAnimation:UIViewAnimationOptionTransitionCurlUp reverse:reverse completion:completion];
+}
+
++ (void)curlUpFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionCurlUp closeAnimation:UIViewAnimationOptionTransitionCurlDown reverse:reverse completion:completion];
+}
+
++ (void)flipLeftFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromLeft closeAnimation:UIViewAnimationOptionTransitionFlipFromRight reverse:reverse completion:completion];
+}
+
++ (void)flipTopFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromTop closeAnimation:UIViewAnimationOptionTransitionFlipFromBottom reverse:reverse completion:completion];
+}
+
++ (void)flipBottomFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromBottom closeAnimation:UIViewAnimationOptionTransitionFlipFromTop reverse:reverse completion:completion];
+}
+
++ (void)flipRightFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromRight closeAnimation:UIViewAnimationOptionTransitionFlipFromLeft reverse:reverse completion:completion];
+}
+
++ (void)performAnimation:(DZCustomModalAnimation)animation fromView:(UIView *)from toView:(UIView *)to reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	SEL selector;
+	switch (animation) {
+		case DZCustomModalAnimationCrossFade:  selector = @selector(fadeFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationBooksFlip:  selector = @selector(flipFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationCurlDown:   selector = @selector(curlDownFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationCurlUp:     selector = @selector(curlUpFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationFlipLeft:   selector = @selector(flipLeftFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationFlipTop:    selector = @selector(flipTopFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationFlipBottom: selector = @selector(flipBottomFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationFlipRight:  selector = @selector(flipRightFrom:to:reverse:completion:); break;
+		default:							   selector = NULL; break;
+	}
+	
+	NSMethodSignature *sig = [self methodSignatureForSelector:selector];
+	if (!sig)
+		return;
+	
+	NSInvocation* invo = [NSInvocation invocationWithMethodSignature:sig];
+	[invo setTarget:self];
+	[invo setSelector:selector];
+	[invo setArgument:&from atIndex:2];
+	[invo setArgument:&to atIndex:3];
+	[invo setArgument:&reverse atIndex:4];
+	[invo setArgument:&completion atIndex:5];
+	[invo invoke];
 }
 
 - (void)perform {
