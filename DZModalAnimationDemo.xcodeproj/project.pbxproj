@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6C583A5614D8913900219C4E /* DZBooksFlipSegueDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DZBooksFlipSegueDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C583A5614D8913900219C4E /* DZModalAnimationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DZModalAnimationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C583A5A14D8913900219C4E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6C583A5C14D8913900219C4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6C583A5E14D8913900219C4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -75,7 +75,7 @@
 		6C583A5714D8913900219C4E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C583A5614D8913900219C4E /* DZBooksFlipSegueDemo.app */,
+				6C583A5614D8913900219C4E /* DZModalAnimationDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,7 +140,7 @@
 			);
 			name = DZModalAnimationDemo;
 			productName = DZBooksFlipSegueDemo;
-			productReference = 6C583A5614D8913900219C4E /* DZBooksFlipSegueDemo.app */;
+			productReference = 6C583A5614D8913900219C4E /* DZModalAnimationDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
