@@ -113,9 +113,7 @@ static CGImageRef imageForView(UIView *aView) {
 
 - (void)perform {
 	UIModalPresentationStyle oldPresentationStyle = [self.destinationViewController modalPresentationStyle];
-
 	[self.destinationViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 	
 	[self.sourceViewController presentViewController:self.destinationViewController animated:NO completion:^{
 		[DZBooksFlipSegue flipToViewController:self.destinationViewController fromViewController:self.sourceViewController];
