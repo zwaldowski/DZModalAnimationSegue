@@ -97,7 +97,7 @@ static CGImageRef imageForView(UIView *aView) {
 	[CATransaction setAnimationDuration:1.0f];
 	[CATransaction setCompletionBlock:^{
 		[contentLayer removeFromSuperlayer];
-		[[UIApplication sharedApplication] performSelector:@selector(endIgnoringInteractionEvents) withObject:nil afterDelay:0.5];
+		[[UIApplication sharedApplication] performSelector:@selector(endIgnoringInteractionEvents) withObject:nil afterDelay:0.2];
 		[[UIDevice currentDevice] performSelector:@selector(beginGeneratingDeviceOrientationNotifications) withObject:nil afterDelay:0.5];
 	}];
 	[oldLayer addAnimation:zAnim forKey:@"OldFlipZ"];
