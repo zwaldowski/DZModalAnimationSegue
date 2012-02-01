@@ -25,7 +25,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="6" kind="custom" identifier="showAlternate" customClass="DZBooksFlipSegue" id="11"/>
+                                    <segue destination="6" kind="custom" identifier="showAlternate" customClass="DZModalAnimationSegue" id="11"/>
                                 </connections>
                             </button>
                         </subviews>

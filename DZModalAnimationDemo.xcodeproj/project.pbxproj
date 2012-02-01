@@ -17,9 +17,10 @@
 		6C583A7114D8913900219C4E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C583A6F14D8913900219C4E /* MainStoryboard_iPad.storyboard */; };
 		6C583A7414D8913A00219C4E /* DZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583A7314D8913A00219C4E /* DZMainViewController.m */; };
 		6C583A7714D8913A00219C4E /* DZFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */; };
-		6C583ABA14D8AC3200219C4E /* DZBooksFlipSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */; };
 		6C583ABD14D8AFAF00219C4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */; };
 		6C583ABF14D8C3FB00219C4E /* DZBooksFlipSegueSide.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */; };
+		6C583ACA14D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583AC914D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m */; };
+		6C583ACE14D999FA00219C4E /* DZModalAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583ACD14D999FA00219C4E /* DZModalAnimationSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,10 +28,10 @@
 		6C583A5A14D8913900219C4E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6C583A5C14D8913900219C4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6C583A5E14D8913900219C4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6C583A6214D8913900219C4E /* DZBooksFlipSegueDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DZBooksFlipSegueDemo-Info.plist"; sourceTree = "<group>"; };
+		6C583A6214D8913900219C4E /* DZModalAnimationDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DZModalAnimationDemo-Info.plist"; sourceTree = "<group>"; };
 		6C583A6414D8913900219C4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C583A6614D8913900219C4E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6C583A6814D8913900219C4E /* DZBooksFlipSegueDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DZBooksFlipSegueDemo-Prefix.pch"; sourceTree = "<group>"; };
+		6C583A6814D8913900219C4E /* DZModalAnimationDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DZModalAnimationDemo-Prefix.pch"; sourceTree = "<group>"; };
 		6C583A6914D8913900219C4E /* DZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZAppDelegate.h; sourceTree = "<group>"; };
 		6C583A6A14D8913900219C4E /* DZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZAppDelegate.m; sourceTree = "<group>"; };
 		6C583A6D14D8913900219C4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
@@ -39,10 +40,12 @@
 		6C583A7314D8913A00219C4E /* DZMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZMainViewController.m; sourceTree = "<group>"; };
 		6C583A7514D8913A00219C4E /* DZFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZFlipsideViewController.h; sourceTree = "<group>"; };
 		6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZFlipsideViewController.m; sourceTree = "<group>"; };
-		6C583AB814D8AC3200219C4E /* DZBooksFlipSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZBooksFlipSegue.h; sourceTree = "<group>"; };
-		6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZBooksFlipSegue.m; sourceTree = "<group>"; };
 		6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZBooksFlipSegueSide.png; sourceTree = "<group>"; };
+		6C583AC814D9982F00219C4E /* CATransaction+DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CATransaction+DZModalAnimationSegue.h"; sourceTree = "<group>"; };
+		6C583AC914D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CATransaction+DZModalAnimationSegue.m"; sourceTree = "<group>"; };
+		6C583ACC14D999FA00219C4E /* DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZModalAnimationSegue.h; sourceTree = "<group>"; };
+		6C583ACD14D999FA00219C4E /* DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZModalAnimationSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +66,7 @@
 		6C583A4B14D8913900219C4E = {
 			isa = PBXGroup;
 			children = (
-				6C583A6014D8913900219C4E /* DZBooksFlipSegueDemo */,
+				6C583A6014D8913900219C4E /* DZModalAnimationDemo */,
 				6C583A5914D8913900219C4E /* Frameworks */,
 				6C583A5714D8913900219C4E /* Products */,
 			);
@@ -88,7 +91,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6C583A6014D8913900219C4E /* DZBooksFlipSegueDemo */ = {
+		6C583A6014D8913900219C4E /* DZModalAnimationDemo */ = {
 			isa = PBXGroup;
 			children = (
 				6C583A6914D8913900219C4E /* DZAppDelegate.h */,
@@ -99,21 +102,23 @@
 				6C583A7314D8913A00219C4E /* DZMainViewController.m */,
 				6C583A7514D8913A00219C4E /* DZFlipsideViewController.h */,
 				6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */,
-				6C583AB814D8AC3200219C4E /* DZBooksFlipSegue.h */,
-				6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */,
+				6C583ACC14D999FA00219C4E /* DZModalAnimationSegue.h */,
+				6C583ACD14D999FA00219C4E /* DZModalAnimationSegue.m */,
+				6C583AC814D9982F00219C4E /* CATransaction+DZModalAnimationSegue.h */,
+				6C583AC914D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m */,
 				6C583A6114D8913900219C4E /* Supporting Files */,
 			);
-			path = DZBooksFlipSegueDemo;
+			path = DZModalAnimationDemo;
 			sourceTree = "<group>";
 		};
 		6C583A6114D8913900219C4E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */,
-				6C583A6214D8913900219C4E /* DZBooksFlipSegueDemo-Info.plist */,
+				6C583A6214D8913900219C4E /* DZModalAnimationDemo-Info.plist */,
 				6C583A6314D8913900219C4E /* InfoPlist.strings */,
 				6C583A6614D8913900219C4E /* main.m */,
-				6C583A6814D8913900219C4E /* DZBooksFlipSegueDemo-Prefix.pch */,
+				6C583A6814D8913900219C4E /* DZModalAnimationDemo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -121,9 +126,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6C583A5514D8913900219C4E /* DZBooksFlipSegueDemo */ = {
+		6C583A5514D8913900219C4E /* DZModalAnimationDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6C583A7A14D8913A00219C4E /* Build configuration list for PBXNativeTarget "DZBooksFlipSegueDemo" */;
+			buildConfigurationList = 6C583A7A14D8913A00219C4E /* Build configuration list for PBXNativeTarget "DZModalAnimationDemo" */;
 			buildPhases = (
 				6C583A5214D8913900219C4E /* Sources */,
 				6C583A5314D8913900219C4E /* Frameworks */,
@@ -133,7 +138,7 @@
 			);
 			dependencies = (
 			);
-			name = DZBooksFlipSegueDemo;
+			name = DZModalAnimationDemo;
 			productName = DZBooksFlipSegueDemo;
 			productReference = 6C583A5614D8913900219C4E /* DZBooksFlipSegueDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -147,7 +152,7 @@
 				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Dizzy Technology";
 			};
-			buildConfigurationList = 6C583A5014D8913900219C4E /* Build configuration list for PBXProject "DZBooksFlipSegueDemo" */;
+			buildConfigurationList = 6C583A5014D8913900219C4E /* Build configuration list for PBXProject "DZModalAnimationDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -159,7 +164,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6C583A5514D8913900219C4E /* DZBooksFlipSegueDemo */,
+				6C583A5514D8913900219C4E /* DZModalAnimationDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -187,7 +192,8 @@
 				6C583A6B14D8913900219C4E /* DZAppDelegate.m in Sources */,
 				6C583A7414D8913A00219C4E /* DZMainViewController.m in Sources */,
 				6C583A7714D8913A00219C4E /* DZFlipsideViewController.m in Sources */,
-				6C583ABA14D8AC3200219C4E /* DZBooksFlipSegue.m in Sources */,
+				6C583ACA14D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m in Sources */,
+				6C583ACE14D999FA00219C4E /* DZModalAnimationSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,8 +278,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DZBooksFlipSegueDemo/DZBooksFlipSegueDemo-Prefix.pch";
-				INFOPLIST_FILE = "DZBooksFlipSegueDemo/DZBooksFlipSegueDemo-Info.plist";
+				GCC_PREFIX_HEADER = "DZModalAnimationDemo/DZModalAnimationDemo-Prefix.pch";
+				INFOPLIST_FILE = "DZModalAnimationDemo/DZModalAnimationDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
@@ -284,8 +290,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DZBooksFlipSegueDemo/DZBooksFlipSegueDemo-Prefix.pch";
-				INFOPLIST_FILE = "DZBooksFlipSegueDemo/DZBooksFlipSegueDemo-Info.plist";
+				GCC_PREFIX_HEADER = "DZModalAnimationDemo/DZModalAnimationDemo-Prefix.pch";
+				INFOPLIST_FILE = "DZModalAnimationDemo/DZModalAnimationDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
@@ -295,7 +301,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6C583A5014D8913900219C4E /* Build configuration list for PBXProject "DZBooksFlipSegueDemo" */ = {
+		6C583A5014D8913900219C4E /* Build configuration list for PBXProject "DZModalAnimationDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C583A7814D8913A00219C4E /* Debug */,
@@ -304,7 +310,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6C583A7A14D8913A00219C4E /* Build configuration list for PBXNativeTarget "DZBooksFlipSegueDemo" */ = {
+		6C583A7A14D8913A00219C4E /* Build configuration list for PBXNativeTarget "DZModalAnimationDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C583A7B14D8913A00219C4E /* Debug */,

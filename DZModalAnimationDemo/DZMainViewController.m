@@ -1,22 +1,15 @@
 //
-//  DZFlipsideViewController.m
-//  DZBooksFlipSegueDemo
+//  DZMainViewController.m
+//  DZModalAnimation
 //
 //  Created by Zachary Waldowski on 1/31/12.
 //  Copyright (c) 2012 Dizzy Technology. All rights reserved.
 //
 
-#import "DZFlipsideViewController.h"
+#import "DZMainViewController.h"
+#import "DZModalAnimationSegue.h"
 
-@implementation DZFlipsideViewController
-
-@synthesize delegate = _delegate;
-
-- (void)awakeFromNib
-{
-	self.contentSizeForViewInPopover = CGSizeMake(320.0, 480.0);
-    [super awakeFromNib];
-}
+@implementation DZMainViewController
 
 - (void)didReceiveMemoryWarning
 {
@@ -69,11 +62,23 @@
 	}
 }
 
-#pragma mark - Actions
+#pragma mark - Flipside View Controller
 
-- (IBAction)done:(id)sender
+- (void)flipsideViewControllerDidFinish:(DZFlipsideViewController *)controller
 {
-    [self.delegate flipsideViewControllerDidFinish:self];
+	[self dismissViewControllerWithCustomAnimation:NULL];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
+        [[segue destinationViewController] setDelegate:self];
+    }
+}
+
+- (IBAction)togglePopover:(id)sender
+{
+    [self performSegueWithIdentifier:@"showAlternate" sender:sender];
 }
 
 @end
