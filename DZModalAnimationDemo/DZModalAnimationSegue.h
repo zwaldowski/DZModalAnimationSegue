@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
+	DZCustomModalAnimationCrossFade,
 	DZCustomModalAnimationBooksFlip
 } DZCustomModalAnimation;
 

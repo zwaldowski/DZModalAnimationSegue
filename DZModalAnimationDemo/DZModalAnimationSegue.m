@@ -24,22 +24,10 @@ static CGImageRef imageForView(UIView *aView) {
     return [image CGImage];
 }
 
-static SEL selectorForAnimation(DZCustomModalAnimation animation) {
-	switch (animation) {
-		case DZCustomModalAnimationBooksFlip:
-			return @selector(flipToView:fromView:completion:);
-			break;
-			
-		default:
-			return NULL;
-			break;
-	}
-}
-
 @interface UIViewController ()
 
-@property (nonatomic) DZCustomModalAnimation customAnimation;
-@property (nonatomic) UIStatusBarStyle animationStatusBarStyle;
+@property (nonatomic, setter = dz_setCustomAnimation:) DZCustomModalAnimation dz_customAnimation;
+@property (nonatomic, setter = dz_setCustomAnimationStatusBarStyle:) UIStatusBarStyle dz_customAnimationStatusBarStyle;
 
 @end
 
@@ -48,6 +36,7 @@ static SEL selectorForAnimation(DZCustomModalAnimation animation) {
 + (void)performAnimation:(DZCustomModalAnimation)animation fromController:(id)from toController:(id)to reverse:(BOOL)reverse completion:(void(^)(void))completion;
 
 + (void)flipFrom:(UIViewController *)fromController to:(UIViewController *)toController reverse:(BOOL)reverse completion:(void(^)(void))completion;
++ (void)fadeFrom:(UIViewController *)fromController to:(UIViewController *)toController reverse:(BOOL)reverse completion:(void(^)(void))completion;
 
 @end
 
@@ -58,8 +47,9 @@ static SEL selectorForAnimation(DZCustomModalAnimation animation) {
 + (void)performAnimation:(DZCustomModalAnimation)animation fromController:(id)from toController:(id)to reverse:(BOOL)reverse completion:(void(^)(void))completion {
 	SEL selector;
 	switch (animation) {
-		case DZCustomModalAnimationBooksFlip:	selector = @selector(flipFrom:to:reverse:completion:); break;
-		default:								selector = NULL; break;
+		case DZCustomModalAnimationCrossFade: selector = @selector(fadeFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationBooksFlip: selector = @selector(flipFrom:to:reverse:completion:); break;
+		default:							  selector = NULL; break;
 	}
 	
 	NSMethodSignature *sig = [self methodSignatureForSelector:selector];
@@ -74,6 +64,22 @@ static SEL selectorForAnimation(DZCustomModalAnimation animation) {
 	[invo setArgument:&reverse atIndex:4];
 	[invo setArgument:&completion atIndex:5];
 	[invo invoke];
+}
+
++ (void)fadeFrom:(UIViewController *)fromController to:(UIViewController *)toController reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	void(^animation)(void) = ^{
+		UIView *fromView = fromController.view;
+		[toController.view.superview addSubview:fromView];
+		[UIView transitionFromView:fromController.view toView:toController.view duration:(1./3.) options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCrossDissolve|UIViewAnimationOptionShowHideTransitionViews completion:^(BOOL finished) {
+			if (completion)
+				completion();
+		}];
+	};
+	
+	if (reverse)
+		[fromController dismissViewControllerAnimated:NO completion:animation];
+	else
+		[fromController presentViewController:toController animated:NO completion:animation];
 }
 
 + (void)flipFrom:(UIViewController *)fromController to:(UIViewController *)toController reverse:(BOOL)reverse completion:(void(^)(void))completion {
@@ -164,11 +170,10 @@ static SEL selectorForAnimation(DZCustomModalAnimation animation) {
 		}];
 	};
 	
-	if (reverse) {
+	if (reverse)
 		[fromController dismissViewControllerAnimated:NO completion:animation];
-	} else {
+	else
 		[fromController presentViewController:toController animated:NO completion:animation];
-	}
 }
 
 - (void)perform {
@@ -176,7 +181,7 @@ static SEL selectorForAnimation(DZCustomModalAnimation animation) {
 	UIStatusBarStyle oldStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 	
 	[self.destinationViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-	[self.destinationViewController setCustomAnimation:self.animation];
+	[self.destinationViewController dz_setCustomAnimation:self.animation];
 	[[UIApplication sharedApplication] setStatusBarStyle:self.animationStatusBarStyle animated:YES];
 	
 	[DZModalAnimationSegue performAnimation:self.animation fromController:self.sourceViewController toController:self.destinationViewController reverse:NO completion:^{
@@ -200,27 +205,27 @@ static char DZCustomAnimationStatusBarKey;
 	UIStatusBarStyle oldStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 	
 	[fromViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-	[[UIApplication sharedApplication] setStatusBarStyle:self.animationStatusBarStyle animated:YES];
+	[[UIApplication sharedApplication] setStatusBarStyle:self.dz_customAnimationStatusBarStyle animated:YES];
 
-	[DZModalAnimationSegue performAnimation:fromViewController.customAnimation fromController:fromViewController toController:toViewController reverse:YES completion:^{
+	[DZModalAnimationSegue performAnimation:fromViewController.dz_customAnimation fromController:fromViewController toController:toViewController reverse:YES completion:^{
 		[fromViewController setModalPresentationStyle:oldPresentationStyle];
 		[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
 	}];
 }
 
-- (void)setAnimationStatusBarStyle:(UIStatusBarStyle)style {
+- (void)setDz_customAnimation:(DZCustomModalAnimation)style {
 	objc_setAssociatedObject(self, &DZCustomAnimationStatusBarKey, [NSNumber numberWithInteger:style], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIStatusBarStyle)animationStatusBarStyle {
+- (UIStatusBarStyle)dz_customAnimationStatusBarStyle {
 	return [objc_getAssociatedObject(self, &DZCustomAnimationStatusBarKey) integerValue];
 }
 
-- (void)setCustomAnimation:(DZCustomModalAnimation)customAnimation {
+- (void)dz_setCustomAnimation:(DZCustomModalAnimation)customAnimation {
 	objc_setAssociatedObject(self, &DZCustomAnimationKey, [NSNumber numberWithInteger:customAnimation], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (DZCustomModalAnimation)customAnimation {
+- (DZCustomModalAnimation)dz_customAnimation {
 	return [objc_getAssociatedObject(self, &DZCustomAnimationKey) integerValue];
 }
 
