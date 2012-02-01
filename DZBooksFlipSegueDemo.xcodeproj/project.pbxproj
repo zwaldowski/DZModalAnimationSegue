@@ -19,6 +19,7 @@
 		6C583A7714D8913A00219C4E /* DZFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */; };
 		6C583ABA14D8AC3200219C4E /* DZBooksFlipSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */; };
 		6C583ABD14D8AFAF00219C4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */; };
+		6C583ABF14D8C3FB00219C4E /* DZBooksFlipSegueSide.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		6C583AB814D8AC3200219C4E /* DZBooksFlipSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZBooksFlipSegue.h; sourceTree = "<group>"; };
 		6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZBooksFlipSegue.m; sourceTree = "<group>"; };
 		6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZBooksFlipSegueSide.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		6C583A6114D8913900219C4E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */,
 				6C583A6214D8913900219C4E /* DZBooksFlipSegueDemo-Info.plist */,
 				6C583A6314D8913900219C4E /* InfoPlist.strings */,
 				6C583A6614D8913900219C4E /* main.m */,
@@ -169,6 +172,7 @@
 				6C583A6514D8913900219C4E /* InfoPlist.strings in Resources */,
 				6C583A6E14D8913900219C4E /* MainStoryboard_iPhone.storyboard in Resources */,
 				6C583A7114D8913900219C4E /* MainStoryboard_iPad.storyboard in Resources */,
+				6C583ABF14D8C3FB00219C4E /* DZBooksFlipSegueSide.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

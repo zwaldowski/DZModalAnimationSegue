@@ -43,7 +43,7 @@ static NSValue *degreeTransform(double degrees) {
 	
     oldLayer.contents = (id)[[self imageForView:[fromController view]] CGImage];
     newLayer.contents = (id)[[self imageForView:[toController view]] CGImage];
-	rightLayer.contents = (__bridge id)[UIImage imageNamed:@"flip-side.png"].CGImage;
+	rightLayer.contents = (__bridge id)[UIImage imageNamed:@"DZBooksFlipSegueSide"].CGImage;
 
 	oldLayer.frame = newLayer.frame = transformLayer.bounds;
 	oldLayer.zPosition = newLayer.zPosition = rightLayer.zPosition = 
