@@ -14,15 +14,15 @@ static NSValue *degreeTransform(double degrees) {
 	return [NSValue valueWithCATransform3D:transform];
 }
 
-@implementation DZBooksFlipSegue
-
-+ (UIImage *)imageForView:(UIView *)aView {
-    UIGraphicsBeginImageContextWithOptions(aView.frame.size, YES, [[UIScreen mainScreen] scale]);
+static CGImageRef imageForView(UIView *aView) {
+	UIGraphicsBeginImageContextWithOptions(aView.frame.size, YES, [[UIScreen mainScreen] scale]);
     [aView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return image;
+    return [image CGImage];
 }
+
+@implementation DZBooksFlipSegue
 
 + (void)flipToViewController:(id)toController fromViewController:(id)fromController {
 	CALayer *contentLayer = [CALayer layer];
@@ -41,8 +41,8 @@ static NSValue *degreeTransform(double degrees) {
  	CALayer *newLayer = [CALayer layer];
 	CALayer *rightLayer = [CALayer layer];
 	
-    oldLayer.contents = (id)[[self imageForView:[fromController view]] CGImage];
-    newLayer.contents = (id)[[self imageForView:[toController view]] CGImage];
+    oldLayer.contents = (__bridge id)imageForView([fromController view]);
+    newLayer.contents = (__bridge id)imageForView([toController view]);
 	rightLayer.contents = (__bridge id)[UIImage imageNamed:@"DZBooksFlipSegueSide"].CGImage;
 
 	oldLayer.frame = newLayer.frame = transformLayer.bounds;
