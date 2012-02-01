@@ -66,14 +66,6 @@ static CGImageRef imageForView(UIView *aView) {
 	[invo invoke];
 }
 
-+ (void)fadeFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[toView.superview addSubview:fromView];
-	[UIView transitionFromView:fromView toView:toView duration:(1./3.) options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCrossDissolve|UIViewAnimationOptionShowHideTransitionViews completion:^(BOOL finished) {
-		if (completion)
-			completion();
-	}];
-}
-
 + (void)flipFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
 	CALayer *contentLayer = [CALayer layer];
 	contentLayer.frame = [toView bounds];

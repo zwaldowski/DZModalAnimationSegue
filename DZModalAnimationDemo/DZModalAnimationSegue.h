@@ -10,7 +10,9 @@
 
 typedef enum {
 	DZCustomModalAnimationCrossFade,
-	DZCustomModalAnimationBooksFlip
+	DZCustomModalAnimationBooksFlip,
+	DZCustomModalAnimationCurlDown,
+	DZCustomModalAnimationCurlUp,
 } DZCustomModalAnimation;
 
 @interface DZModalAnimationSegue : UIStoryboardSegue
