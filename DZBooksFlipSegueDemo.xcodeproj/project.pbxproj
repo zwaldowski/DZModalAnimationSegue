@@ -17,6 +17,8 @@
 		6C583A7114D8913900219C4E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C583A6F14D8913900219C4E /* MainStoryboard_iPad.storyboard */; };
 		6C583A7414D8913A00219C4E /* DZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583A7314D8913A00219C4E /* DZMainViewController.m */; };
 		6C583A7714D8913A00219C4E /* DZFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */; };
+		6C583ABA14D8AC3200219C4E /* DZBooksFlipSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */; };
+		6C583ABD14D8AFAF00219C4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,18 +26,21 @@
 		6C583A5A14D8913900219C4E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6C583A5C14D8913900219C4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6C583A5E14D8913900219C4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6C583A6214D8913900219C4E /* DZBooksFlipSegueDemo-Info.plist */ = {isa = PBXFileReference; path = "DZBooksFlipSegueDemo-Info.plist"; sourceTree = "<group>"; };
+		6C583A6214D8913900219C4E /* DZBooksFlipSegueDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DZBooksFlipSegueDemo-Info.plist"; sourceTree = "<group>"; };
 		6C583A6414D8913900219C4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C583A6614D8913900219C4E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6C583A6814D8913900219C4E /* DZBooksFlipSegueDemo-Prefix.pch */ = {isa = PBXFileReference; path = "DZBooksFlipSegueDemo-Prefix.pch"; sourceTree = "<group>"; };
-		6C583A6914D8913900219C4E /* DZAppDelegate.h */ = {isa = PBXFileReference; path = DZAppDelegate.h; sourceTree = "<group>"; };
+		6C583A6814D8913900219C4E /* DZBooksFlipSegueDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DZBooksFlipSegueDemo-Prefix.pch"; sourceTree = "<group>"; };
+		6C583A6914D8913900219C4E /* DZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZAppDelegate.h; sourceTree = "<group>"; };
 		6C583A6A14D8913900219C4E /* DZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZAppDelegate.m; sourceTree = "<group>"; };
 		6C583A6D14D8913900219C4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		6C583A7014D8913900219C4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		6C583A7214D8913900219C4E /* DZMainViewController.h */ = {isa = PBXFileReference; path = DZMainViewController.h; sourceTree = "<group>"; };
+		6C583A7214D8913900219C4E /* DZMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZMainViewController.h; sourceTree = "<group>"; };
 		6C583A7314D8913A00219C4E /* DZMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZMainViewController.m; sourceTree = "<group>"; };
-		6C583A7514D8913A00219C4E /* DZFlipsideViewController.h */ = {isa = PBXFileReference; path = DZFlipsideViewController.h; sourceTree = "<group>"; };
+		6C583A7514D8913A00219C4E /* DZFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DZFlipsideViewController.h; sourceTree = "<group>"; };
 		6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZFlipsideViewController.m; sourceTree = "<group>"; };
+		6C583AB814D8AC3200219C4E /* DZBooksFlipSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZBooksFlipSegue.h; sourceTree = "<group>"; };
+		6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZBooksFlipSegue.m; sourceTree = "<group>"; };
+		6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C583ABD14D8AFAF00219C4E /* QuartzCore.framework in Frameworks */,
 				6C583A5B14D8913900219C4E /* UIKit.framework in Frameworks */,
 				6C583A5D14D8913900219C4E /* Foundation.framework in Frameworks */,
 				6C583A5F14D8913900219C4E /* CoreGraphics.framework in Frameworks */,
@@ -72,6 +78,7 @@
 		6C583A5914D8913900219C4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */,
 				6C583A5A14D8913900219C4E /* UIKit.framework */,
 				6C583A5C14D8913900219C4E /* Foundation.framework */,
 				6C583A5E14D8913900219C4E /* CoreGraphics.framework */,
@@ -90,6 +97,8 @@
 				6C583A7314D8913A00219C4E /* DZMainViewController.m */,
 				6C583A7514D8913A00219C4E /* DZFlipsideViewController.h */,
 				6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */,
+				6C583AB814D8AC3200219C4E /* DZBooksFlipSegue.h */,
+				6C583AB914D8AC3200219C4E /* DZBooksFlipSegue.m */,
 				6C583A6114D8913900219C4E /* Supporting Files */,
 			);
 			path = DZBooksFlipSegueDemo;
@@ -174,6 +183,7 @@
 				6C583A6B14D8913900219C4E /* DZAppDelegate.m in Sources */,
 				6C583A7414D8913A00219C4E /* DZMainViewController.m in Sources */,
 				6C583A7714D8913A00219C4E /* DZFlipsideViewController.m in Sources */,
+				6C583ABA14D8AC3200219C4E /* DZBooksFlipSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +305,7 @@
 				6C583A7C14D8913A00219C4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
