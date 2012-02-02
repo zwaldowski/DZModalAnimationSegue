@@ -11,17 +11,23 @@
 typedef enum {
 	DZCustomModalAnimationCrossFade,
 	DZCustomModalAnimationBooksFlip,
-	DZCustomModalAnimationCurlDown,
-	DZCustomModalAnimationCurlUp,
-	DZCustomModalAnimationFlipLeft,
-	DZCustomModalAnimationFlipTop,
-	DZCustomModalAnimationFlipBottom,
-	DZCustomModalAnimationFlipRight
+	DZCustomModalAnimationCurl,   // up and down
+	DZCustomModalAnimationFlip,   // up, down, left, right
+	DZCustomModalAnimationMoveIn, // up, down, left, right
+	DZCustomModalAnimationPush    // up, down, left, right
 } DZCustomModalAnimation;
+
+typedef enum {
+	DZCustomModalAnimationSubtypeLeft,
+	DZCustomModalAnimationSubtypeTop,
+	DZCustomModalAnimationSubtypeBottom,
+	DZCustomModalAnimationSubtypeRight,
+} DZCustomModalAnimationSubtype;
 
 @interface DZModalAnimationSegue : UIStoryboardSegue
 
 @property (nonatomic) DZCustomModalAnimation animation;
+@property (nonatomic) DZCustomModalAnimationSubtype animationSubtype;
 @property (nonatomic) UIStatusBarStyle animationStatusBarStyle;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "DZModalAnimationSegue.h"
 #import "CATransaction+DZModalAnimationSegue.h"
+#import "CAAnimation+DZModalAnimationSegue.h"
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
 
@@ -27,21 +28,22 @@ static CGImageRef imageForView(UIView *aView) {
 @interface UIViewController ()
 
 @property (nonatomic, setter = dz_setCustomAnimation:) DZCustomModalAnimation dz_customAnimation;
+@property (nonatomic, setter = dz_setCustomAnimationSubtype:) DZCustomModalAnimationSubtype dz_customAnimationSubtype;
 @property (nonatomic, setter = dz_setCustomAnimationStatusBarStyle:) UIStatusBarStyle dz_customAnimationStatusBarStyle;
 
 @end
 
 @interface DZModalAnimationSegue()
 
-+ (void)performAnimation:(DZCustomModalAnimation)animation fromView:(UIView *)from toView:(UIView *)to reverse:(BOOL)reverse completion:(void(^)(void))completion;
++ (void)performAnimation:(DZCustomModalAnimation)animation withSubtype:(DZCustomModalAnimationSubtype)subtype fromView:(UIView *)from toView:(UIView *)to reverse:(BOOL)reverse completion:(void(^)(void))completion;
 
 @end
 
 @implementation DZModalAnimationSegue
 
-@synthesize animation, animationStatusBarStyle;
+@synthesize animation, animationStatusBarStyle, animationSubtype;
 
-+ (void)flipFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
++ (void)booksFlipFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
 	CALayer *contentLayer = [CALayer layer];
 	contentLayer.frame = [toView bounds];
 	contentLayer.backgroundColor = [UIColor blackColor].CGColor;
@@ -114,18 +116,14 @@ static CGImageRef imageForView(UIView *aView) {
 		[oldLayer addAnimation:frontFlip forKey:@"OldFlip"];
 		[newLayer addAnimation:backFlip forKey:@"NewFlip"];
 		[rightLayer addAnimation:rightFlip forKey:@"RightFlip"];
-		[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-		[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 	} completion:^{
 		[contentLayer removeFromSuperlayer];
-		[[UIApplication sharedApplication] performSelector:@selector(endIgnoringInteractionEvents) withObject:nil afterDelay:0.2];
-		[[UIDevice currentDevice] performSelector:@selector(beginGeneratingDeviceOrientationNotifications) withObject:nil afterDelay:0.5];
 		if (completion)
 			completion();
 	}];
 }
 
-+ (void)transitionFrom:(UIView *)fromView to:(UIView *)toView duration:(NSTimeInterval)length openAnimation:(UIViewAnimationOptions)openOptions closeAnimation:(UIViewAnimationOptions)closeOptions reverse:(BOOL)reverse completion:(void(^)(void))completion {
++ (void)viewTransitionFrom:(UIView *)fromView to:(UIView *)toView duration:(NSTimeInterval)length openAnimation:(UIViewAnimationOptions)openOptions closeAnimation:(UIViewAnimationOptions)closeOptions reverse:(BOOL)reverse completion:(void(^)(void))completion {
 	[toView.superview addSubview:fromView];
 	UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionShowHideTransitionViews;
 	if (reverse)
@@ -139,44 +137,99 @@ static CGImageRef imageForView(UIView *aView) {
 }
 
 + (void)fadeFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[self transitionFrom:fromView to:toView duration:(1./3.) openAnimation:UIViewAnimationOptionTransitionCrossDissolve closeAnimation:UIViewAnimationOptionTransitionCrossDissolve reverse:reverse completion:completion];
+	[self viewTransitionFrom:fromView to:toView duration:(1./3.) openAnimation:UIViewAnimationOptionTransitionCrossDissolve closeAnimation:UIViewAnimationOptionTransitionCrossDissolve reverse:reverse completion:completion];
 }
 
-+ (void)curlDownFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionCurlDown closeAnimation:UIViewAnimationOptionTransitionCurlUp reverse:reverse completion:completion];
++ (void)curlFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse subtype:(DZCustomModalAnimationSubtype)subtype completion:(void(^)(void))completion {
+	UIViewAnimationOptions subtypeOptionsOpen = (subtype == DZCustomModalAnimationSubtypeBottom) ? UIViewAnimationOptionTransitionCurlUp : UIViewAnimationOptionTransitionCurlDown;
+	UIViewAnimationOptions subtypeOptionsClose = (subtype == DZCustomModalAnimationSubtypeBottom) ? UIViewAnimationOptionTransitionCurlDown : UIViewAnimationOptionTransitionCurlUp;
+	[self viewTransitionFrom:fromView to:toView duration:1.0 openAnimation:subtypeOptionsOpen closeAnimation:subtypeOptionsClose reverse:reverse completion:completion];
 }
 
-+ (void)curlUpFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionCurlUp closeAnimation:UIViewAnimationOptionTransitionCurlDown reverse:reverse completion:completion];
++ (void)flipFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse subtype:(DZCustomModalAnimationSubtype)subtype completion:(void(^)(void))completion {
+	UIViewAnimationOptions subtypeOptionsOpen, subtypeOptionsClose;
+	switch (subtype) {
+		case DZCustomModalAnimationSubtypeLeft:
+			subtypeOptionsOpen = UIViewAnimationOptionTransitionFlipFromLeft;
+			subtypeOptionsClose = UIViewAnimationOptionTransitionFlipFromRight;
+			break;
+		case DZCustomModalAnimationSubtypeTop:
+			subtypeOptionsOpen = UIViewAnimationOptionTransitionFlipFromTop;
+			subtypeOptionsClose = UIViewAnimationOptionTransitionFlipFromBottom;
+			break;
+		case DZCustomModalAnimationSubtypeRight:
+			subtypeOptionsOpen = UIViewAnimationOptionTransitionFlipFromRight;
+			subtypeOptionsClose = UIViewAnimationOptionTransitionFlipFromLeft;
+			break;
+		case DZCustomModalAnimationSubtypeBottom:
+			subtypeOptionsOpen = UIViewAnimationOptionTransitionFlipFromBottom;
+			subtypeOptionsClose = UIViewAnimationOptionTransitionFlipFromTop;
+			break;
+	}
+	[self viewTransitionFrom:fromView to:toView duration:1.0 openAnimation:subtypeOptionsOpen closeAnimation:subtypeOptionsClose reverse:reverse completion:completion];
 }
 
-+ (void)flipLeftFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromLeft closeAnimation:UIViewAnimationOptionTransitionFlipFromRight reverse:reverse completion:completion];
++ (void)layerTransitionFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse animationType:(NSString *)animationType subtype:(DZCustomModalAnimationSubtype)subtype completion:(void(^)(void))completion {
+	CALayer *contentLayer = [CALayer layer];
+	contentLayer.frame = [toView bounds];
+	contentLayer.backgroundColor = [UIColor blackColor].CGColor;
+	
+	CALayer *oldLayer = [CALayer layer];
+	CALayer *newLayer = [CALayer layer];
+	
+	oldLayer.contents = (__bridge id)imageForView(fromView);
+	newLayer.contents = (__bridge id)imageForView(toView);
+	
+	oldLayer.frame = newLayer.frame = contentLayer.bounds;
+	
+	[[toView layer] addSublayer:contentLayer];
+	[contentLayer addSublayer:oldLayer];
+	[contentLayer addSublayer:newLayer];
+	
+	CATransition *transition = [CATransition animation];
+	
+	NSString *animationSubtype = nil;
+	switch (subtype) {
+		case DZCustomModalAnimationSubtypeLeft:   animationSubtype = reverse ? kCATransitionFromRight : kCATransitionFromLeft; break;
+		case DZCustomModalAnimationSubtypeTop:    animationSubtype = reverse ? kCATransitionFromBottom : kCATransitionFromTop; break;
+		case DZCustomModalAnimationSubtypeBottom: animationSubtype = reverse ? kCATransitionFromTop : kCATransitionFromBottom; break;
+		case DZCustomModalAnimationSubtypeRight:  animationSubtype = reverse ? kCATransitionFromLeft : kCATransitionFromRight; break;
+	}
+	
+	transition.type = animationType;
+	transition.subtype = animationSubtype;
+	transition.fillMode = kCAFillModeForwards;
+	transition.removedOnCompletion = YES;
+	transition.duration = 1.0;
+	transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+	transition.didStopBlock = ^(CAAnimation *animation, BOOL didStop) {
+		[contentLayer removeFromSuperlayer];
+		if (completion)
+			completion();
+	};
+	
+	[newLayer addAnimation:transition forKey:nil];
 }
 
-+ (void)flipTopFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromTop closeAnimation:UIViewAnimationOptionTransitionFlipFromBottom reverse:reverse completion:completion];
++ (void)moveInFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse subtype:(DZCustomModalAnimationSubtype)subtype completion:(void(^)(void))completion {
+	[self layerTransitionFrom:fromView to:toView reverse:reverse animationType:kCATransitionMoveIn subtype:subtype completion:completion];
 }
 
-+ (void)flipBottomFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromBottom closeAnimation:UIViewAnimationOptionTransitionFlipFromTop reverse:reverse completion:completion];
++ (void)pushFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse subtype:(DZCustomModalAnimationSubtype)subtype completion:(void(^)(void))completion {
+	[self layerTransitionFrom:fromView to:toView reverse:reverse animationType:kCATransitionPush subtype:subtype completion:completion];
 }
 
-+ (void)flipRightFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
-	[self transitionFrom:fromView to:toView duration:1.0 openAnimation:UIViewAnimationOptionTransitionFlipFromRight closeAnimation:UIViewAnimationOptionTransitionFlipFromLeft reverse:reverse completion:completion];
-}
-
-+ (void)performAnimation:(DZCustomModalAnimation)animation fromView:(UIView *)from toView:(UIView *)to reverse:(BOOL)reverse completion:(void(^)(void))completion {
++ (void)performAnimation:(DZCustomModalAnimation)animation withSubtype:(DZCustomModalAnimationSubtype)subtype fromView:(UIView *)from toView:(UIView *)to reverse:(BOOL)reverse completion:(void(^)(void))completion {
+	BOOL hasSubtype = ((animation != DZCustomModalAnimationCrossFade) && (animation != DZCustomModalAnimationBooksFlip));
+	
 	SEL selector;
 	switch (animation) {
 		case DZCustomModalAnimationCrossFade:  selector = @selector(fadeFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationBooksFlip:  selector = @selector(flipFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationCurlDown:   selector = @selector(curlDownFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationCurlUp:     selector = @selector(curlUpFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationFlipLeft:   selector = @selector(flipLeftFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationFlipTop:    selector = @selector(flipTopFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationFlipBottom: selector = @selector(flipBottomFrom:to:reverse:completion:); break;
-		case DZCustomModalAnimationFlipRight:  selector = @selector(flipRightFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationBooksFlip:  selector = @selector(booksFlipFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationCurl:       selector = @selector(curlFrom:to:reverse:completion:); break;
+		case DZCustomModalAnimationFlip:       selector = @selector(flipFrom:to:reverse:subtype:completion:); break;
+		case DZCustomModalAnimationMoveIn:     selector = @selector(moveInFrom:to:reverse:subtype:completion:); break;
+		case DZCustomModalAnimationPush:       selector = @selector(pushFrom:to:reverse:subtype:completion:); break;
 		default:							   selector = NULL; break;
 	}
 	
@@ -190,7 +243,9 @@ static CGImageRef imageForView(UIView *aView) {
 	[invo setArgument:&from atIndex:2];
 	[invo setArgument:&to atIndex:3];
 	[invo setArgument:&reverse atIndex:4];
-	[invo setArgument:&completion atIndex:5];
+	if (hasSubtype)
+		[invo setArgument:&subtype atIndex:5];
+	[invo setArgument:&completion atIndex:hasSubtype ? 6 : 5];
 	[invo invoke];
 }
 
@@ -201,11 +256,15 @@ static CGImageRef imageForView(UIView *aView) {
 	[self.destinationViewController setModalPresentationStyle:UIModalPresentationFullScreen];
 	[self.destinationViewController dz_setCustomAnimation:self.animation];
 	[[UIApplication sharedApplication] setStatusBarStyle:self.animationStatusBarStyle animated:YES];
+	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 	
 	[self.sourceViewController presentViewController:self.destinationViewController animated:NO completion:^{
-		[DZModalAnimationSegue performAnimation:self.animation fromView:[self.sourceViewController view] toView:[self.destinationViewController view] reverse:NO completion:^{
+		[DZModalAnimationSegue performAnimation:self.animation withSubtype:self.animationSubtype fromView:[self.sourceViewController view] toView:[self.destinationViewController view] reverse:NO completion:^{
 			[self.destinationViewController setModalPresentationStyle:oldPresentationStyle];
 			[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
+			[[UIApplication sharedApplication] performSelector:@selector(endIgnoringInteractionEvents) withObject:nil afterDelay:0.2];
+			[[UIDevice currentDevice] performSelector:@selector(beginGeneratingDeviceOrientationNotifications) withObject:nil afterDelay:0.5];
 		}];
 	}];
 }
@@ -215,6 +274,7 @@ static CGImageRef imageForView(UIView *aView) {
 @implementation UIViewController (DZModalAnimationSegue)
 
 static char DZCustomAnimationKey;
+static char DZCustomAnimationSubtypeKey;
 static char DZCustomAnimationStatusBarKey;
 
 - (void)dismissViewControllerWithCustomAnimation:(void (^)(void))completion {
@@ -226,29 +286,41 @@ static char DZCustomAnimationStatusBarKey;
 	
 	[fromViewController setModalPresentationStyle:UIModalPresentationFullScreen];
 	[[UIApplication sharedApplication] setStatusBarStyle:self.dz_customAnimationStatusBarStyle animated:YES];
+	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 	
 	[fromViewController dismissViewControllerAnimated:NO completion:^{
-		[DZModalAnimationSegue performAnimation:fromViewController.dz_customAnimation fromView:fromViewController.view toView:toViewController.view reverse:YES completion:^{
+		[DZModalAnimationSegue performAnimation:fromViewController.dz_customAnimation withSubtype:fromViewController.dz_customAnimationSubtype fromView:fromViewController.view toView:toViewController.view reverse:YES completion:^{
 			[fromViewController setModalPresentationStyle:oldPresentationStyle];
 			[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
+			[[UIApplication sharedApplication] performSelector:@selector(endIgnoringInteractionEvents) withObject:nil afterDelay:0.2];
+			[[UIDevice currentDevice] performSelector:@selector(beginGeneratingDeviceOrientationNotifications) withObject:nil afterDelay:0.5];
 		}];
 	}];
 }
 
-- (void)setDz_customAnimation:(DZCustomModalAnimation)style {
+- (void)dz_setCustomAnimation:(DZCustomModalAnimation)animation {
+	objc_setAssociatedObject(self, &DZCustomAnimationKey, [NSNumber numberWithInteger:animation], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (DZCustomModalAnimation)dz_customAnimation {
+	return [objc_getAssociatedObject(self, &DZCustomAnimationKey) integerValue];
+}
+
+- (void)dz_setCustomAnimationSubtype:(DZCustomModalAnimationSubtype)type {
+	objc_setAssociatedObject(self, &DZCustomAnimationSubtypeKey, [NSNumber numberWithInteger:type], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (DZCustomModalAnimationSubtype)dz_customAnimationSubtype {
+	return [objc_getAssociatedObject(self, &DZCustomAnimationSubtypeKey) integerValue];
+}
+
+- (void)dz_setCustomAnimationStatusBarStyle:(DZCustomModalAnimation)style {
 	objc_setAssociatedObject(self, &DZCustomAnimationStatusBarKey, [NSNumber numberWithInteger:style], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIStatusBarStyle)dz_customAnimationStatusBarStyle {
 	return [objc_getAssociatedObject(self, &DZCustomAnimationStatusBarKey) integerValue];
-}
-
-- (void)dz_setCustomAnimation:(DZCustomModalAnimation)customAnimation {
-	objc_setAssociatedObject(self, &DZCustomAnimationKey, [NSNumber numberWithInteger:customAnimation], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (DZCustomModalAnimation)dz_customAnimation {
-	return [objc_getAssociatedObject(self, &DZCustomAnimationKey) integerValue];
 }
 
 @end
