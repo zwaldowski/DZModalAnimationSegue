@@ -28,7 +28,6 @@ typedef enum {
 
 @property (nonatomic) DZCustomModalAnimation animation;
 @property (nonatomic) DZCustomModalAnimationSubtype animationSubtype;
-@property (nonatomic) UIStatusBarStyle animationStatusBarStyle;
 
 @end
 

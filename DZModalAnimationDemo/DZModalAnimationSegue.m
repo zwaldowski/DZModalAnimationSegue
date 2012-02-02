@@ -29,7 +29,6 @@ static CGImageRef imageForView(UIView *aView) {
 
 @property (nonatomic, setter = dz_setCustomAnimation:) DZCustomModalAnimation dz_customAnimation;
 @property (nonatomic, setter = dz_setCustomAnimationSubtype:) DZCustomModalAnimationSubtype dz_customAnimationSubtype;
-@property (nonatomic, setter = dz_setCustomAnimationStatusBarStyle:) UIStatusBarStyle dz_customAnimationStatusBarStyle;
 
 @end
 
@@ -41,7 +40,7 @@ static CGImageRef imageForView(UIView *aView) {
 
 @implementation DZModalAnimationSegue
 
-@synthesize animation, animationStatusBarStyle, animationSubtype;
+@synthesize animation, animationSubtype;
 
 + (void)booksFlipFrom:(UIView *)fromView to:(UIView *)toView reverse:(BOOL)reverse completion:(void(^)(void))completion {
 	CALayer *contentLayer = [CALayer layer];
@@ -255,7 +254,6 @@ static CGImageRef imageForView(UIView *aView) {
 	
 	[self.destinationViewController setModalPresentationStyle:UIModalPresentationFullScreen];
 	[self.destinationViewController dz_setCustomAnimation:self.animation];
-	[[UIApplication sharedApplication] setStatusBarStyle:self.animationStatusBarStyle animated:YES];
 	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 	
@@ -275,24 +273,20 @@ static CGImageRef imageForView(UIView *aView) {
 
 static char DZCustomAnimationKey;
 static char DZCustomAnimationSubtypeKey;
-static char DZCustomAnimationStatusBarKey;
 
 - (void)dismissViewControllerWithCustomAnimation:(void (^)(void))completion {
 	UIViewController *fromViewController = self.presentedViewController ?: self;
 	UIViewController *toViewController = self.presentingViewController ?: self;
 	
 	UIModalPresentationStyle oldPresentationStyle = [fromViewController modalPresentationStyle];
-	UIStatusBarStyle oldStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 	
 	[fromViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-	[[UIApplication sharedApplication] setStatusBarStyle:self.dz_customAnimationStatusBarStyle animated:YES];
 	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 	
 	[fromViewController dismissViewControllerAnimated:NO completion:^{
 		[DZModalAnimationSegue performAnimation:fromViewController.dz_customAnimation withSubtype:fromViewController.dz_customAnimationSubtype fromView:fromViewController.view toView:toViewController.view reverse:YES completion:^{
 			[fromViewController setModalPresentationStyle:oldPresentationStyle];
-			[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
 			[[UIApplication sharedApplication] performSelector:@selector(endIgnoringInteractionEvents) withObject:nil afterDelay:0.2];
 			[[UIDevice currentDevice] performSelector:@selector(beginGeneratingDeviceOrientationNotifications) withObject:nil afterDelay:0.5];
 		}];
@@ -313,14 +307,6 @@ static char DZCustomAnimationStatusBarKey;
 
 - (DZCustomModalAnimationSubtype)dz_customAnimationSubtype {
 	return [objc_getAssociatedObject(self, &DZCustomAnimationSubtypeKey) integerValue];
-}
-
-- (void)dz_setCustomAnimationStatusBarStyle:(DZCustomModalAnimation)style {
-	objc_setAssociatedObject(self, &DZCustomAnimationStatusBarKey, [NSNumber numberWithInteger:style], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (UIStatusBarStyle)dz_customAnimationStatusBarStyle {
-	return [objc_getAssociatedObject(self, &DZCustomAnimationStatusBarKey) integerValue];
 }
 
 @end
