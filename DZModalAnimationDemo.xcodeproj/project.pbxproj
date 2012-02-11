@@ -43,12 +43,12 @@
 		6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZFlipsideViewController.m; sourceTree = "<group>"; };
 		6C583ABC14D8AFAF00219C4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZBooksFlipSegueSide.png; sourceTree = "<group>"; };
-		6C583AC814D9982F00219C4E /* CATransaction+DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CATransaction+DZModalAnimationSegue.h"; sourceTree = "<group>"; };
-		6C583AC914D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CATransaction+DZModalAnimationSegue.m"; sourceTree = "<group>"; };
-		6C583ACC14D999FA00219C4E /* DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZModalAnimationSegue.h; sourceTree = "<group>"; };
-		6C583ACD14D999FA00219C4E /* DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZModalAnimationSegue.m; sourceTree = "<group>"; };
-		6CA0F8B914DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+DZModalAnimationSegue.h"; sourceTree = "<group>"; };
-		6CA0F8BA14DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+DZModalAnimationSegue.m"; sourceTree = "<group>"; };
+		6C583AC814D9982F00219C4E /* CATransaction+DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; name = "CATransaction+DZModalAnimationSegue.h"; path = "../CATransaction+DZModalAnimationSegue.h"; sourceTree = "<group>"; };
+		6C583AC914D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CATransaction+DZModalAnimationSegue.m"; path = "../CATransaction+DZModalAnimationSegue.m"; sourceTree = "<group>"; };
+		6C583ACC14D999FA00219C4E /* DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DZModalAnimationSegue.h; path = ../DZModalAnimationSegue.h; sourceTree = "<group>"; };
+		6C583ACD14D999FA00219C4E /* DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DZModalAnimationSegue.m; path = ../DZModalAnimationSegue.m; sourceTree = "<group>"; };
+		6CA0F8B914DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; name = "CAAnimation+DZModalAnimationSegue.h"; path = "../CAAnimation+DZModalAnimationSegue.h"; sourceTree = "<group>"; };
+		6CA0F8BA14DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CAAnimation+DZModalAnimationSegue.m"; path = "../CAAnimation+DZModalAnimationSegue.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,10 +66,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C460E8214E6009100B4171E /* DZModalAnimationSegue */ = {
+			isa = PBXGroup;
+			children = (
+				6C583ACC14D999FA00219C4E /* DZModalAnimationSegue.h */,
+				6C583ACD14D999FA00219C4E /* DZModalAnimationSegue.m */,
+				6C583AC814D9982F00219C4E /* CATransaction+DZModalAnimationSegue.h */,
+				6C583AC914D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m */,
+				6CA0F8B914DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.h */,
+				6CA0F8BA14DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.m */,
+				6C460E8414E600A600B4171E /* Resources */,
+			);
+			name = DZModalAnimationSegue;
+			path = DZModalAnimationDemo;
+			sourceTree = "<group>";
+		};
+		6C460E8414E600A600B4171E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */,
+			);
+			name = Resources;
+			path = ../Resources;
+			sourceTree = "<group>";
+		};
 		6C583A4B14D8913900219C4E = {
 			isa = PBXGroup;
 			children = (
-				6C583A6014D8913900219C4E /* DZModalAnimationDemo */,
+				6C460E8214E6009100B4171E /* DZModalAnimationSegue */,
+				6C583A6014D8913900219C4E /* Demo */,
 				6C583A5914D8913900219C4E /* Frameworks */,
 				6C583A5714D8913900219C4E /* Products */,
 			);
@@ -94,7 +119,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6C583A6014D8913900219C4E /* DZModalAnimationDemo */ = {
+		6C583A6014D8913900219C4E /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				6C583A6914D8913900219C4E /* DZAppDelegate.h */,
@@ -105,21 +130,15 @@
 				6C583A7314D8913A00219C4E /* DZMainViewController.m */,
 				6C583A7514D8913A00219C4E /* DZFlipsideViewController.h */,
 				6C583A7614D8913A00219C4E /* DZFlipsideViewController.m */,
-				6C583ACC14D999FA00219C4E /* DZModalAnimationSegue.h */,
-				6C583ACD14D999FA00219C4E /* DZModalAnimationSegue.m */,
-				6C583AC814D9982F00219C4E /* CATransaction+DZModalAnimationSegue.h */,
-				6C583AC914D9982F00219C4E /* CATransaction+DZModalAnimationSegue.m */,
-				6CA0F8B914DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.h */,
-				6CA0F8BA14DA37F700A4F332 /* CAAnimation+DZModalAnimationSegue.m */,
 				6C583A6114D8913900219C4E /* Supporting Files */,
 			);
+			name = Demo;
 			path = DZModalAnimationDemo;
 			sourceTree = "<group>";
 		};
 		6C583A6114D8913900219C4E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6C583ABE14D8C3FB00219C4E /* DZBooksFlipSegueSide.png */,
 				6C583A6214D8913900219C4E /* DZModalAnimationDemo-Info.plist */,
 				6C583A6314D8913900219C4E /* InfoPlist.strings */,
 				6C583A6614D8913900219C4E /* main.m */,
