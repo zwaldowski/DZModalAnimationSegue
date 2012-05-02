@@ -104,9 +104,6 @@ static CGImageRef imageForView(UIView *aView) {
 						degreeTransform(-180),
 						degreeTransform(90), nil];
 	
-	frontFlip.fillMode = backFlip.fillMode = rightFlip.fillMode = kCAFillModeBoth;
-	frontFlip.removedOnCompletion = backFlip.removedOnCompletion = rightFlip.removedOnCompletion = NO;
-	
 	CAMediaTimingFunction *timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 	[CATransaction commitWithDuration:1.0 timingFunction:timingFunction transactions:^{
 		[oldLayer addAnimation:zAnim forKey:@"OldFlipZ"];
@@ -197,8 +194,6 @@ static CGImageRef imageForView(UIView *aView) {
 	
 	transition.type = animationType;
 	transition.subtype = animationSubtype;
-	transition.fillMode = kCAFillModeForwards;
-	transition.removedOnCompletion = YES;
 	transition.duration = 1.0;
 	transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 	transition.didStopBlock = ^(CAAnimation *animation, BOOL didStop) {
